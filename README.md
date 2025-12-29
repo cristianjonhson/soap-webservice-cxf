@@ -1,5 +1,11 @@
 # SOAP Web Service - Apache CXF (Contract-First)
 
+> **📦 Estructura del Repositorio**: Este repositorio contiene DOS proyectos independientes:
+> - **🟦 Servidor SOAP** (raíz): Puerto 8080 - Servicio SOAP con Apache CXF
+> - **🟩 Cliente REST** ([rest-client-soap/](rest-client-soap/)): Puerto 9090 - API REST que consume el SOAP
+> 
+> Ver [REPOSITORIO.md](REPOSITORIO.md) para documentación completa de ambos proyectos.
+
 Proyecto de ejemplo que demuestra un Web Service SOAP usando Apache CXF con el enfoque **Contract-First** (primero el contrato WSDL, luego el código Java).
 
 ## 📋 Características
