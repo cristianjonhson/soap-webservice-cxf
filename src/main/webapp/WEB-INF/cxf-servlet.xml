@@ -10,14 +10,15 @@
 
     <import resource="classpath:META-INF/cxf/cxf.xml"/>
 
+    <!-- Bean de la implementación del servicio -->
+    <bean id="customerServiceImpl" class="com.example.soap.service.CustomerServiceImpl"/>
+
     <!-- Definición del servicio SOAP -->
     <jaxws:endpoint 
         id="customerService"
-        implementor="com.example.soap.service.CustomerServiceImpl"
-        address="/customer">
-        <jaxws:properties>
-            <entry key="schema-validation-enabled" value="true"/>
-        </jaxws:properties>
+        implementor="#customerServiceImpl"
+        address="/customer"
+        wsdlLocation="classpath:CustomerService.wsdl">
     </jaxws:endpoint>
 
 </beans>

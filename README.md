@@ -53,24 +53,28 @@ soap-webservice-cxf/
 
 ### Pasos
 
-1. **Generar las clases desde el WSDL:**
+1. **Generar las clases desde el WSDL y compilar:**
    ```bash
-   mvn clean generate-sources
+   mvn clean generate-sources compile
    ```
 
-2. **Compilar el proyecto:**
-   ```bash
-   mvn clean package
-   ```
-
-3. **Ejecutar con Jetty:**
+2. **Ejecutar con Jetty:**
    ```bash
    mvn jetty:run
    ```
 
-4. **Acceder al servicio:**
-   - WSDL: http://localhost:8080/soap-ws/services/customer?wsdl
+3. **Acceder al servicio:**
+   - **WSDL**: http://localhost:8080/soap-ws/services/customer?wsdl
    - Endpoint: http://localhost:8080/soap-ws/services/customer
+
+> ⚠️ **Nota**: Si accedes al endpoint sin `?wsdl` desde el navegador, verás un error SOAP. Esto es normal. Para consumir el servicio correctamente, usa peticiones SOAP POST o accede al WSDL agregando `?wsdl` al final de la URL.
+
+### Script de Prueba Rápida
+
+Ejecuta el script incluido para probar todas las operaciones:
+```bash
+./test-soap.sh
+```
 
 ## 🧪 Probar el Servicio
 
