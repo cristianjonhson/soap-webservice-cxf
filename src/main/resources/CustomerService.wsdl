@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://soap.example.com/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://soap.example.com/"
+                  name="CustomerService">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://soap.example.com/">
+            
+            <!-- Customer Type -->
+            <xsd:complexType name="Customer">
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:long"/>
+                    <xsd:element name="name" type="xsd:string"/>
+                    <xsd:element name="email" type="xsd:string"/>
+                    <xsd:element name="phone" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+            <!-- Get Customer Request -->
+            <xsd:element name="getCustomerRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:long"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Get Customer Response -->
+            <xsd:element name="getCustomerResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="customer" type="tns:Customer"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Create Customer Request -->
+            <xsd:element name="createCustomerRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                        <xsd:element name="email" type="xsd:string"/>
+                        <xsd:element name="phone" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Create Customer Response -->
+            <xsd:element name="createCustomerResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="customer" type="tns:Customer"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Get All Customers Request -->
+            <xsd:element name="getAllCustomersRequest">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Get All Customers Response -->
+            <xsd:element name="getAllCustomersResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="customers" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <!-- Messages -->
+    <wsdl:message name="getCustomerRequest">
+        <wsdl:part name="parameters" element="tns:getCustomerRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="getCustomerResponse">
+        <wsdl:part name="parameters" element="tns:getCustomerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="createCustomerRequest">
+        <wsdl:part name="parameters" element="tns:createCustomerRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="createCustomerResponse">
+        <wsdl:part name="parameters" element="tns:createCustomerResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="getAllCustomersRequest">
+        <wsdl:part name="parameters" element="tns:getAllCustomersRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="getAllCustomersResponse">
+        <wsdl:part name="parameters" element="tns:getAllCustomersResponse"/>
+    </wsdl:message>
+
+    <!-- Port Type -->
+    <wsdl:portType name="CustomerServicePortType">
+        <wsdl:operation name="getCustomer">
+            <wsdl:input message="tns:getCustomerRequest"/>
+            <wsdl:output message="tns:getCustomerResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="createCustomer">
+            <wsdl:input message="tns:createCustomerRequest"/>
+            <wsdl:output message="tns:createCustomerResponse"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="getAllCustomers">
+            <wsdl:input message="tns:getAllCustomersRequest"/>
+            <wsdl:output message="tns:getAllCustomersResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <!-- Binding -->
+    <wsdl:binding name="CustomerServiceBinding" type="tns:CustomerServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+        <wsdl:operation name="getCustomer">
+            <soap:operation soapAction="http://soap.example.com/getCustomer"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="createCustomer">
+            <soap:operation soapAction="http://soap.example.com/createCustomer"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="getAllCustomers">
+            <soap:operation soapAction="http://soap.example.com/getAllCustomers"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <!-- Service -->
+    <wsdl:service name="CustomerService">
+        <wsdl:port name="CustomerServicePort" binding="tns:CustomerServiceBinding">
+            <soap:address location="http://localhost:8080/soap-ws/services/customer"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
