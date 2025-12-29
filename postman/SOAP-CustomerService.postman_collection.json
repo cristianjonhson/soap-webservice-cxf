@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "soap-customer-service",
+		"name": "SOAP Customer Service - CXF",
+		"description": "Colección de peticiones SOAP para el servicio de clientes con Apache CXF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Customers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <soap:getAllCustomersRequest/>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/soap-ws/services/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"soap-ws",
+						"services",
+						"customer"
+					]
+				},
+				"description": "Obtiene todos los clientes del sistema"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer by ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <soap:getCustomerRequest>\n         <id>1</id>\n      </soap:getCustomerRequest>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/soap-ws/services/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"soap-ws",
+						"services",
+						"customer"
+					]
+				},
+				"description": "Obtiene un cliente específico por su ID. Cambia el valor del campo <id> para buscar diferentes clientes."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"http://soap.example.com/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <soap:createCustomerRequest>\n         <name>Ana Martínez</name>\n         <email>ana.martinez@example.com</email>\n         <phone>+34 600 555 777</phone>\n      </soap:createCustomerRequest>\n   </soapenv:Body>\n</soapenv:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/soap-ws/services/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"soap-ws",
+						"services",
+						"customer"
+					]
+				},
+				"description": "Crea un nuevo cliente en el sistema. El campo <phone> es opcional."
+			},
+			"response": []
+		},
+		{
+			"name": "Get WSDL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/soap-ws/services/customer?wsdl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"soap-ws",
+						"services",
+						"customer"
+					],
+					"query": [
+						{
+							"key": "wsdl",
+							"value": null
+						}
+					]
+				},
+				"description": "Obtiene el WSDL del servicio SOAP"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/soap-ws/services",
+			"type": "string"
+		}
+	]
+}

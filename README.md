@@ -78,7 +78,109 @@ Ejecuta el script incluido para probar todas las operaciones:
 
 ## 🧪 Probar el Servicio
 
-### Usando SOAP UI o Postman
+### Usando SoapUI
+
+#### 1. Crear nuevo proyecto SOAP
+1. Abre **SoapUI**
+2. Ve a **File → New SOAP Project**
+3. En **Initial WSDL**, pega: `http://localhost:8080/soap-ws/services/customer?wsdl`
+4. Haz clic en **OK**
+
+#### 2. Probar las operaciones
+SoapUI genera automáticamente peticiones de ejemplo para cada operación:
+
+- **getAllCustomers**: Click derecho → Show Request Editor → Ejecutar
+- **getCustomer**: Modifica el `<id>1</id>` y ejecuta
+- **createCustomer**: Llena los datos del cliente y ejecuta
+
+#### 3. Ejemplo de petición en SoapUI
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:soap="http://soap.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:getCustomerRequest>
+         <id>1</id>
+      </soap:getCustomerRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+---
+
+### Usando Postman
+
+#### 1. Configurar petición POST
+1. Abre **Postman**
+2. Crea una nueva petición **POST**
+3. URL: `http://localhost:8080/soap-ws/services/customer`
+
+#### 2. Configurar Headers
+Agrega estos headers:
+- `Content-Type`: `text/xml; charset=utf-8`
+- `SOAPAction`: (vacío o la acción específica)
+
+#### 3. Configurar Body
+Selecciona **Body → raw → XML** y pega una petición:
+
+**Obtener todos los clientes:**
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:soap="http://soap.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:getAllCustomersRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+**Obtener cliente por ID:**
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:soap="http://soap.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:getCustomerRequest>
+         <id>1</id>
+      </soap:getCustomerRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+**Crear nuevo cliente:**
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:soap="http://soap.example.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:createCustomerRequest>
+         <name>Ana Martínez</name>
+         <email>ana.martinez@example.com</email>
+         <phone>+34 600 555 777</phone>
+      </soap:createCustomerRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+#### 4. Ejecutar
+- Haz clic en **Send**
+- La respuesta XML aparecerá abajo
+
+#### 5. Importar colección pre-configurada
+📦 **Colección lista para usar**: [`postman/SOAP-CustomerService.postman_collection.json`](postman/SOAP-CustomerService.postman_collection.json)
+
+En Postman:
+1. Click en **Import**
+2. Selecciona el archivo de la colección
+3. ¡Listo! Todas las peticiones están configuradas
+
+📖 **Guía completa**: Ver [`postman/README-Postman.md`](postman/README-Postman.md)
+
+📖 **Guía para SoapUI**: Ver [`soapui/README-SoapUI.md`](soapui/README-SoapUI.md)
+
+---
+
+### Ejemplos con cURL
 
 **1. Obtener todos los clientes:**
 ```xml
